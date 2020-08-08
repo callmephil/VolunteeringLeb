@@ -54,7 +54,7 @@ export default function CardPersonMissing({ data, isGrid }) {
     </div>
   );
 }
-
+/**
 function CardPersonMissingList({ grid }) {
   const data = [
     {
@@ -89,3 +89,4 @@ function CardPersonMissingList({ grid }) {
     </React.Fragment>
   );
 }
+**/
