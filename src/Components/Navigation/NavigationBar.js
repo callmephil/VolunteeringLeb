@@ -1,16 +1,24 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 
 export default function NavigationBar() {
   return (
-    <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar
+      fixed="top"
+      collapseOnSelect
+      expand="lg"
+      bg="dark"
+      variant="dark"
+      style={{ padding: "10px 15px" }}>
       <Navbar.Brand as={Link} to="/" className="fa fa-home"></Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link as={Link} to="/media">MEDIA</Nav.Link>
+          <Nav.Link as={Link} to="/media">
+            MEDIA
+          </Nav.Link>
           <NavDropdown title="HELP CENTER" id="collasible-nav-dropdown">
             <NavDropdown.Item href="physical">Physical assistance</NavDropdown.Item>
             <NavDropdown.Item href="psycological">Psycological assistance</NavDropdown.Item>
@@ -20,13 +28,13 @@ export default function NavigationBar() {
           </NavDropdown>
         </Nav>
         <Nav>
-          <Nav.Link style={{color:"white"}} eventKey={2} href="#todo">
-            Arabic
+          <Button variant="outline-info">AR</Button>
+          <Nav.Link style={{ color: "white" }} eventKey={2} href="/helpus">
+            SUPPORT US!
           </Nav.Link>
-          <Nav.Link style={{color:"white"}} eventKey={2} href="/helpus">
-            HELP US !
+          <Nav.Link style={{ color: "white" }}  as={Link} to="/login">
+            LOGIN
           </Nav.Link>
-          <Button variant="outline-success">LOGIN</Button>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

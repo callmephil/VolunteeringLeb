@@ -8,7 +8,7 @@ import CardWikiList from "../../Components/Cards/CardWiki";
 
 function ReportMissing() {
   return (
-    <Container style={{padding: "0"}}>
+    <Container style={{ padding: "0" }}>
       <InformationMessage />
       <Row>
         <Col sm={8} md={10}>
@@ -37,7 +37,7 @@ function ReportMissing() {
 
 function PrecautionCards() {
   return (
-    <Container style={{padding: "0"}}>
+    <Container style={{ padding: "0" }}>
       <InformationMessage />
       <Row>
         <CardWikiList grid={true} />
@@ -47,8 +47,8 @@ function PrecautionCards() {
 }
 
 function TabNGO() {
-  return (    
-  <Container style={{padding: "0"}}>
+  return (
+    <Container style={{ padding: "0" }}>
       <InformationMessage />
       <Row>
         <CardNGOList grid={true} />
@@ -58,35 +58,29 @@ function TabNGO() {
 }
 
 export default function HomaPage() {
-  const [key, setKey] = useState("home");
+  const [key, setKey] = useState("precautions");
 
   return (
     <Row>
-      <Col sm={9}>
-        <Container>
-          <Tabs
-            className="pb-2"
-            id="controlled-tab-example"
-            activeKey={key}
-            onSelect={(k) => setKey(k)}>
-            <Tab eventKey="home" title="Precautions">
-              <PrecautionCards />
-            </Tab>
-            <Tab eventKey="profile" title="Missing">
-              <ReportMissing />
-            </Tab>
-            <Tab eventKey="contact" title="Trusted NGO">
-              <TabNGO />
-            </Tab>
-          </Tabs>
-        </Container>
+      <Col sm={9} className="no-padding">
+        <Tabs
+          className="card-shadow"
+          id="controlled-tab-example"
+          activeKey={key}
+          onSelect={(k) => setKey(k)}>
+          <Tab eventKey="precautions" title="Precautions">
+            <PrecautionCards />
+          </Tab>
+          <Tab eventKey="report" title="Missing">
+            <ReportMissing />
+          </Tab>
+          <Tab eventKey="ngo" title="NGO(s)">
+            <TabNGO />
+          </Tab>
+        </Tabs>
       </Col>
       <Col sm={3}>
-        <Container>
-          <Row>
-            <CardAlertList />
-          </Row>
-        </Container>
+        <CardAlertList />
       </Col>
     </Row>
   );

@@ -19,7 +19,7 @@ function CardPersonMissing({ data, isGrid }) {
   return (
     <div style={{ paddingBottom: "15px" }}>
       <Card className="card-shadow">
-        <Card.Img variant="top" src={img} />
+        <Card.Img variant="top" src={img} width="330" height="330" />
         <Card.Header className=" text-align-center">MISSING: {fullName}</Card.Header>
         <Card.Body>
           <Card.Title></Card.Title>
@@ -68,18 +68,22 @@ export default function CardPersonMissingList({ grid }) {
     },
   ];
 
-  if (data.length === 0) {
+  if (typeof data === "undefined" || data.length === 0) {
     return <div> Fix Empty List </div>;
-  } else
-    return data.map((cardInfo, key) => {
-      if (grid) {
-        return (
-          <Col key={`person-missing-${key}`} md={4}>
-            <CardPersonMissing  data={cardInfo} isGrid={true} />
-          </Col>
-        );
-      } else {
-        return <CardPersonMissing key={`person-missing-${key}`} data={cardInfo} isGrid={false} />;
-      }
-    });
+  }
+
+  return (
+    <React.Fragment>
+      {data.map((cardInfo, key) => {
+        if (grid) {
+          return (
+            <Col key={`person-missing-${key}`} md={4}>
+              <CardPersonMissing data={cardInfo} isGrid={true} />
+            </Col>
+          );
+        } else
+          return <CardPersonMissing key={`person-missing-${key}`} data={cardInfo} isGrid={false} />;
+      })}
+    </React.Fragment>
+  );
 }

@@ -10,8 +10,8 @@ function CardNGO({ data }) {
           style={{ backgroundColor, padding: "1.5rem" }}
           variant="top"
           src={logo}
-          width="90"
-          height="180"
+          width="320"
+          height="205"
         />
         <Card.Header style={{ textAlign: "center" }}>{header}</Card.Header>
         <Card.Body>
@@ -31,7 +31,7 @@ function CardNGO({ data }) {
   );
 }
 
-export default function CardNGOList({grid = true}) {
+export default function CardNGOList({ grid = true }) {
   const data = [
     {
       logo: "https://offrejoie.org/wp-content/uploads/2020/07/cropped-small-logo@3x-1.png",
@@ -52,19 +52,22 @@ export default function CardNGOList({grid = true}) {
       ],
     },
   ];
-  
-  if (data.length === 0) {
+
+  if (typeof data === "undefined" || data.length === 0) {
     return <div> Fix Empty List </div>;
-  } else
-    return data.map((cardInfo, key) => {
-      if (grid) {
-        return (
-          <Col key={`ngo-card-${key}`} md={4}>
-            <CardNGO data={cardInfo} />
-          </Col>
-        );
-      } else {
-        return <CardNGO key={`ngo-card-${key}`} data={cardInfo} />;
-      }
-    });
+  }
+
+  return (
+    <React.Fragment>
+      {data.map((cardInfo, key) => {
+        if (grid) {
+          return (
+            <Col key={`ngo-card-${key}`} md={4}>
+              <CardNGO data={cardInfo} />
+            </Col>
+          );
+        } else return <CardNGO key={`ngo-card-${key}`} data={cardInfo} />;
+      })}
+    </React.Fragment>
+  );
 }

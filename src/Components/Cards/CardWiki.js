@@ -6,7 +6,7 @@ function CardWiki({ data }) {
   return (
     <div style={{ paddingBottom: "15px" }}>
       <Card>
-        <Card.Img variant="top" src={imgSrc} />
+        <Card.Img variant="top" src={imgSrc} width="320" height="205" />
         <Card.Body>
           <Card.Title></Card.Title>
           <Card.Text>{text}</Card.Text>
@@ -46,19 +46,22 @@ export default function CardWikiList({ grid }) {
       ],
     },
   ];
-
-  if (data.length === 0) {
+  
+  if (typeof data === "undefined" || data.length === 0) {
     return <div> Fix Empty List </div>;
-  } else
-    return data.map((cardInfo, key) => {
-      if (grid) {
-        return (
-          <Col key={`wiki-card-${key}`} md={6} lg={4}>
-            <CardWiki data={cardInfo} />
-          </Col>
-        );
-      } else {
-        return <CardWiki key={`wiki-card-${key}`} data={cardInfo} />;
-      }
-    });
+  }
+
+  return (
+    <React.Fragment>
+      {data.map((cardInfo, key) => {
+        if (grid) {
+          return (
+            <Col key={`wiki-card-${key}`} md={6} lg={4}>
+              <CardWiki data={cardInfo} />
+            </Col>
+          );
+        } else return <CardWiki key={`wiki-card-${key}`} data={cardInfo} />;
+      })}
+    </React.Fragment>
+  );
 }
