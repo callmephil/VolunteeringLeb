@@ -33,9 +33,14 @@ export default function CardPersonMissing() {
             </Row>
           </Container>
         </Card.Footer>
+        <Card.Footer>
+          <small className="text-muted">Last updated 3 mins ago</small>
+        </Card.Footer>
       </Card>
       <div className="mt-2">
-        <Button style={{width: "100%" }} className="btn btn-warning">View All</Button>
+        <Button style={{ width: "100%" }} className="btn btn-warning">
+          View All
+        </Button>
       </div>
     </div>
   );

@@ -1,14 +1,16 @@
 import React from "react";
+import { Link } from 'react-router-dom';
+
 import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 
 export default function NavigationBar() {
   return (
     <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Navbar.Brand className="fa fa-home" href="#home"></Navbar.Brand>
+      <Navbar.Brand as={Link} to="/" className="fa fa-home"></Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="/volunteering">VOLUNTEERING</Nav.Link>
+          <Nav.Link as={Link} to="/volunteering">VOLUNTEERING</Nav.Link>
           <NavDropdown title="HELP CENTER" id="collasible-nav-dropdown">
             <NavDropdown.Item href="physical">Physical assistance</NavDropdown.Item>
             <NavDropdown.Item href="psycological">Psycological assistance</NavDropdown.Item>

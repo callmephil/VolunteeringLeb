@@ -12,7 +12,6 @@ import {
 } from "react-bootstrap";
 import CardAlert from "../../Components/Cards/CardAlert";
 import CardPersonMissing from "../../Components/Cards/CardPersonMissing";
-import FeedMedia from "../../Components/Feed/FeedMedia";
 import CardWiki from "../../Components/Cards/CardWiki";
 import CardNGO from "../../Components/Cards/CardNGO";
 
@@ -94,16 +93,16 @@ function PrecautionCards() {
             </InputGroup.Append>
           </InputGroup>
         </Col> */}
-        <Col md={4}>
+        <Col md={6} lg={4}>
           <CardWiki />
         </Col>
-        <Col md={4}>
+        <Col md={6} lg={4}>
           <CardWiki />
         </Col>
-        <Col md={4}>
+        <Col md={6} lg={4}>
           <CardWiki />
         </Col>
-        <Col md={4}>
+        <Col md={6} lg={4}>
           <CardWiki />
         </Col>
       </Row>
@@ -152,7 +151,7 @@ export default function VolunteeringPage() {
                 <ReportMissing />
               </Tab>
               <Tab eventKey="contact" title="Trusted NGO">
-                  <TabNGO />
+                <TabNGO />
               </Tab>
             </Tabs>
           </Container>
