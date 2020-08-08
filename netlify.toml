@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/*"
+  to = "/media"
+  status = 200
