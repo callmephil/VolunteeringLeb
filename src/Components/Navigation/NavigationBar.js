@@ -10,7 +10,7 @@ export default function NavigationBar() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link as={Link} to="/volunteering">VOLUNTEERING</Nav.Link>
+          <Nav.Link as={Link} to="/media">MEDIA</Nav.Link>
           <NavDropdown title="HELP CENTER" id="collasible-nav-dropdown">
             <NavDropdown.Item href="physical">Physical assistance</NavDropdown.Item>
             <NavDropdown.Item href="psycological">Psycological assistance</NavDropdown.Item>

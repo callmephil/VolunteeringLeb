@@ -1,33 +1,70 @@
 import React from "react";
-import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Card, ListGroup, ListGroupItem, Col } from "react-bootstrap";
 
-export default function CardNGO() {
+function CardNGO({ data }) {
+  const { logo, backgroundColor, header, description, links } = data;
   return (
     <div style={{ paddingBottom: "15px" }}>
-      <Card>
+      <Card className="mb-2 card-shadow">
         <Card.Img
-          style={{ backgroundColor: "blue", padding: "30px"}}
+          style={{ backgroundColor, padding: "1.5rem" }}
           variant="top"
-          src="https://offrejoie.org/wp-content/uploads/2020/07/cropped-small-logo@3x-1.png"
-          width="90" height="180"
+          src={logo}
+          width="90"
+          height="180"
         />
-          <Card.Header style={{textAlign: "center"}}>Offre joie</Card.Header>
+        <Card.Header style={{ textAlign: "center" }}>{header}</Card.Header>
         <Card.Body>
-          <Card.Text>
-            Offrejoie was born in the midst of a raging civil war in Lebanon in 1985. A group of
-            young Red Cross volunteers worked together to help the injured. Alleviating human
-            suffering transcended any differences between them.
-          </Card.Text>
+          <Card.Text>{description}</Card.Text>
         </Card.Body>
         <ListGroup className="list-group-flush">
-          <ListGroupItem>Need Volunteer</ListGroupItem>
-          <ListGroupItem>Need Donation</ListGroupItem>
+          {links.map((link) => (
+            <ListGroupItem>
+              <Card.Link target="_blank" href={link.src}>
+                {link.text}
+              </Card.Link>
+            </ListGroupItem>
+          ))}
         </ListGroup>
-        <Card.Body>
-          <Card.Link href="https://offrejoie.org/contact-us/">Volunteer</Card.Link>
-          <Card.Link href="https://offrejoie.org/donate/">Donate</Card.Link>
-        </Card.Body>
       </Card>
     </div>
   );
+}
+
+export default function CardNGOList({grid = true}) {
+  const data = [
+    {
+      logo: "https://offrejoie.org/wp-content/uploads/2020/07/cropped-small-logo@3x-1.png",
+      backgroundColor: "#165b99",
+      header: "Offre joie",
+      description: `Offrejoie was born in the midst of a raging civil war in Lebanon in 1985. A group of
+      young Red Cross volunteers worked together to help the injured. Alleviating human
+      suffering transcended any differences between them.`,
+      links: [
+        {
+          text: "Donate",
+          src: "https://offrejoie.org/donate/",
+        },
+        {
+          text: "Volunteer",
+          src: "https://offrejoie.org/contact-us/",
+        },
+      ],
+    },
+  ];
+  
+  if (data.length === 0) {
+    return <div> Fix Empty List </div>;
+  } else
+    return data.map((cardInfo, key) => {
+      if (grid) {
+        return (
+          <Col key={`ngo-card-${key}`} md={4}>
+            <CardNGO data={cardInfo} />
+          </Col>
+        );
+      } else {
+        return <CardNGO key={`ngo-card-${key}`} data={cardInfo} />;
+      }
+    });
 }

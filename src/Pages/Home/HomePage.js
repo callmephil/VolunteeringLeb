@@ -1,36 +1,92 @@
 import React, { useState } from "react";
-import { Row, Col, Tabs, Tab } from "react-bootstrap";
-import CardPersonMissing from "../../Components/Cards/CardPersonMissing";
-import FeedMedia from "../../Components/Feed/FeedMedia";
-import CardAlert from "../../Components/Cards/CardAlert";
+import { Container, Row, Col, InputGroup, FormControl, Button, Tabs, Tab } from "react-bootstrap";
+import CardNGOList from "../../Components/Cards/CardNGO";
+import InformationMessage from "./Components/InformationMessage";
+import CardPersonMissingList from "../../Components/Cards/CardPersonMissing";
+import CardAlertList from "../../Components/Cards/CardAlert";
+import CardWikiList from "../../Components/Cards/CardWiki";
 
-export default function HomePage() {
+function ReportMissing() {
+  return (
+    <Container style={{padding: "0"}}>
+      <InformationMessage />
+      <Row>
+        <Col sm={8} md={10}>
+          <InputGroup className="mb-3">
+            <FormControl
+              placeholder="Recipient's username"
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+            />
+            <InputGroup.Append>
+              <Button variant="outline-secondary">Search</Button>
+            </InputGroup.Append>
+          </InputGroup>
+        </Col>
+        <Col sm={4} md={2} style={{ paddingLeft: "0" }}>
+          <Button style={{ width: "100%" }} variant="outline-secondary">
+            Add New
+          </Button>
+        </Col>
+
+        <CardPersonMissingList grid={true} />
+      </Row>
+    </Container>
+  );
+}
+
+function PrecautionCards() {
+  return (
+    <Container style={{padding: "0"}}>
+      <InformationMessage />
+      <Row>
+        <CardWikiList grid={true} />
+      </Row>
+    </Container>
+  );
+}
+
+function TabNGO() {
+  return (    
+  <Container style={{padding: "0"}}>
+      <InformationMessage />
+      <Row>
+        <CardNGOList grid={true} />
+      </Row>
+    </Container>
+  );
+}
+
+export default function HomaPage() {
   const [key, setKey] = useState("home");
+
   return (
     <Row>
-      <Col md={3} style={{ padding: "0" }}>
-        <CardPersonMissing />
-        <CardPersonMissing />
-        <CardPersonMissing />
+      <Col sm={9}>
+        <Container>
+          <Tabs
+            className="pb-2"
+            id="controlled-tab-example"
+            activeKey={key}
+            onSelect={(k) => setKey(k)}>
+            <Tab eventKey="home" title="Precautions">
+              <PrecautionCards />
+            </Tab>
+            <Tab eventKey="profile" title="Missing">
+              <ReportMissing />
+            </Tab>
+            <Tab eventKey="contact" title="Trusted NGO">
+              <TabNGO />
+            </Tab>
+          </Tabs>
+        </Container>
       </Col>
-
-      <Col md={7} style={{ padding: "0px 15px" }}>
-        <Tabs
-          className="pb-2"
-          id="controlled-tab-example"
-          activeKey={key}
-          onSelect={(k) => setKey(k)}>
-          <Tab eventKey="home" title="Live Feed">
-            <FeedMedia />
-            <FeedMedia />
-            <FeedMedia />
-          </Tab>
-          <Tab eventKey="profile" title="Events"></Tab>
-          <Tab eventKey="contact" title="Contact" disabled></Tab>
-        </Tabs>
-      </Col>
-      <Col md={2} style={{ padding: "0" }}>
-        <CardAlert />
+      <Col sm={3}>
+        <Container>
+          <Row>
+            <CardAlertList />
+          </Row>
+        </Container>
       </Col>
     </Row>
   );
