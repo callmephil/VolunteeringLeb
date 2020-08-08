@@ -48,7 +48,15 @@ export default function CardAlertList() {
     },
   ];
 
-  if (data.length === 0) {
+  if (typeof data === "undefined" || data.length === 0) {
     return <div> Fix Empty List </div>;
-  } else return data.map((cardInfo, key) => <CardAlert key={`alert-${key}`} data={cardInfo} />);
+  }
+
+  return (
+    <React.Fragment>
+      {data.map((cardInfo, key) => (
+        <CardAlert key={`alert-${key}`} data={cardInfo} />
+      ))}
+    </React.Fragment>
+  );
 }

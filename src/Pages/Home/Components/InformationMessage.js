@@ -6,7 +6,7 @@ export default function InformationMessage() {
   
     return (
       <>
-        <Alert show={show} variant="warning">
+        <Alert show={show} variant="warning" className="card-shadow">
           <Alert.Heading>How's it going?!</Alert.Heading>
           <p>
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec
