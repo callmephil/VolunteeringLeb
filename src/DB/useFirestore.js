@@ -6,7 +6,27 @@ const BREAK = Symbol("BREAK")
 /**
  * A simple hook to retrieve collections from Firebase
  * This is a simple hook that retrieves THE ENTIRE collection.
- * Don't use it for large dataset
+ * Don't use it for large dataset!
+ * 
+ * Collections are returned as arrays of this object:
+ * ```
+ * { 
+ *   id: string // firebaseId
+ *   dirty: bool // if the node is not synced yet
+ *   localOnly: bool // if the node is just created
+ *   deleted: boolean // if the node is deleted
+ *   error: string // if there was an error in the last operation
+ *   data: any // whatever you're storing
+ * }
+ * ```
+ * The hook is optimistic; that is, when you do an operation, it assumes
+ * the operation will succeed and immediately updates the collection.
+ * 
+ * It sets the `dirty` bit to `true`. When an answer is received from the server,
+ * `dirty` is set to `false`.
+ * If the server response is not positive, then an error is logged in the `error`
+ * part, and `dirty` stays `false`.
+ * 
  * @param {string} collectionName the name of the collection you want to load
  */
 export const useFirestoreCollection = (collectionName) => {
@@ -27,7 +47,7 @@ export const useFirestoreCollection = (collectionName) => {
             }
             const id = doc.id
             const node = {
-              id, dirty:false, localOnly:false, data
+              id, dirty:false, localOnly:false, deleted: false, error:"", data
             }
             list.push(node)
         });
@@ -36,6 +56,10 @@ export const useFirestoreCollection = (collectionName) => {
       .catch(onError)
   }, [ collectionName ])
 
+  /**
+   * Creates a new object
+   * @param {any} data 
+   */
   const add = (data) => {
 
     const tempId = Math.random() + (new Date())
@@ -47,34 +71,100 @@ export const useFirestoreCollection = (collectionName) => {
     return firestore.collection(collectionName).add(data)
     .then((docRef)=>{
       const id = docRef.id
-      setCollection(data.map(node=>
+      setCollection(collection.map(node=>
         node.id === tempId ? { id, dirty: false, localOnly:false, ...node } : node
       ))
-    }).catch(onError)
+    }).catch( err => {
+      onError(err)
+      setCollection(collection.map(node=>
+        node.id === tempId ? { error: err.message, ...node } : node
+      ))
+    })
   }
 
-  const update = (id, data) => {
+  /**
+   * Updates an existing object
+   * @param {string} id the firebase ID
+   * @param {any} data your new data. It will be merged with previous data
+   * @param {bool} merge ... unless `merge` is set to false
+   */
+  const update = (id, data, merge = true) => {
 
-    setCollection(data.map(node=>
+    setCollection(collection.map(node=>
       node.id === id ? { id, dirty: true, data: {...node.data, ...data } } : node
     ))
 
-    return firestore.collection(collectionName).doc(id).set(data, { merge: true })
+    return firestore.collection(collectionName).doc(id).set(data, { merge })
       .then(()=>{
-        setCollection(data.map(node=>
+        setCollection(collection.map(node=>
           node.id === id ? { dirty: false, ...node } : node
         ))
       })
-      .catch(onError)
+      .catch( err => {
+        onError(err)
+        setCollection(collection.map(node=>
+          node.id === id ? { error: err.message, ...node } : node
+        ))
+      })
   }
 
-  const map = (fn) => {
+  /**
+   * Removes an object from the database
+   * @param {string} id the Firebase ID
+   */
+  const remove = (id) => {
+    
+    setCollection(collection.map(node=>
+      node.id === id ? { dirty: true, deleted: true, ...node } : node
+    ))
+
+    firestore.collection(collectionName).doc(id).delete()
+      .then(() => {
+        const newCollection = collection.splice()
+        const index = newCollection.findIndex(node => node.id === id)
+        if(index >= 0){
+          newCollection.splice(index, 1)
+          setCollection(newCollection)
+        }
+      }).catch( err => {
+        onError(err)
+        setCollection(collection.map(node=>
+          node.id === id ? { error: err.message, ...node } : node
+        ))
+      });
+  }
+
+  /**
+   * Maps the collection. Gives you the internal data of each node
+   * This can also be used to filter, or to find.
+   * 
+   * Return `SKIP` to filter an item out
+   * Return `BREAK` to stop the loop
+   * 
+   * The function you pass receives:
+   * - data: the data inside the node (whatever you saved on firebase)
+   * - meta: an object 
+   * ```
+   * { 
+   *   id: string, // the FirebaseID 
+   *   dirty: bool, // if the node is not yet updated on Firebase
+   *   localOnly: bool,  // if true, the node doesn't exist on Firebase
+   *   error: string, // if there was an error adding, updating, or deleting, it will be logged here
+   *   index: number, // the index in the loop
+   *   BREAK: Symbol, // return this to interrupt the loop
+   *   SKIP: Symbol // return this to skip the item in the loop
+   * }
+   * ```
+   * @param {*} fn 
+   * @param {*} withDeleted 
+   */
+  const map = (fn, withDeleted = false) => {
     const { length } = collection
     const output = []
     let index = 0;
     while(index < length){
-      const { id, dirty, localOnly, data } = collection[index]
-      const meta = { id, dirty, localOnly, index, BREAK, SKIP }
+      const { id, dirty, localOnly, error, data } = collection[index]
+      const meta = { id, dirty, localOnly, index, error, BREAK, SKIP }
       const ret = fn(data, meta)
       if(ret === BREAK){ return output }
       if(ret !== SKIP){
@@ -85,6 +175,6 @@ export const useFirestoreCollection = (collectionName) => {
     return output
   }
 
-  return { add, update, map, collection }
+  return { add, update, map, remove, collection }
 
 }
