@@ -12,7 +12,7 @@ export default function NavigationBar() {
       bg="dark"
       variant="dark"
       style={{ padding: "10px 15px" }}>
-      <Navbar.Brand as={Link} to="/" className="fa fa-home"></Navbar.Brand>
+      <Navbar.Brand as={Link} to="/" className="fa fa-home"> Helb</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
