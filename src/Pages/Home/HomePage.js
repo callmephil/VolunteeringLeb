@@ -6,7 +6,7 @@ import CardPersonMissing from "../../Components/Cards/CardPersonMissing";
 import CardAlertList from "../../Components/Cards/CardAlert";
 import CardWikiList from "../../Components/Cards/CardWiki";
 import { useFirestoreCollection } from "../../DB/useFirestore";
-
+import List from "../../Components/List";
 
 function ReportMissing() {
   const missingPeople = useFirestoreCollection("missing")
@@ -32,11 +32,10 @@ function ReportMissing() {
             Add New
           </Button>
         </Col>
-        { missingPeople.map(( data, { id } )=>{
-          return <Col key={`person-missing-${id}`} md={4}>
-            <CardPersonMissing  data={data} isGrid={true} />
-          </Col>
-        })}
+        <List grid={true}>
+        { missingPeople.map(( data, { id } ) => <CardPersonMissing key={id} data={data} /> )
+        }
+        </List>
       </Row>
     </Container>
   );
