@@ -1,7 +1,9 @@
 import React from "react";
 import { Card, Row, Container, Button, Col } from "react-bootstrap";
+import { formatDistanceToNow } from 'date-fns'
 
-function CardPersonMissing({ data, isGrid }) {
+export default function CardPersonMissing({ data, isGrid }) {
+  
   const { fullName, img, description, location, phoneNbr, status, lastUpdate } = data;
 
   const DisplayViewAllButton = () => {
@@ -45,7 +47,7 @@ function CardPersonMissing({ data, isGrid }) {
           </Container>
         </Card.Footer>
         <Card.Footer>
-          <small className="text-muted">Last updated {lastUpdate} mins ago</small>
+          <small className="text-muted">Last updated {formatDistanceToNow(lastUpdate)} ago</small>
         </Card.Footer>
       </Card>
       <DisplayViewAllButton />
@@ -53,20 +55,7 @@ function CardPersonMissing({ data, isGrid }) {
   );
 }
 
-export default function CardPersonMissingList({ grid }) {
-  const data = [
-    {
-      fullName: "Firstname Lastname",
-      img: "https://www.w3schools.com/w3images/avatar1.png",
-      header: "Offre joie",
-      description: `Some quick example text to build on the card title and make up the bulk of the card's
-      content.`,
-      location: "Gemeyzeh",
-      phoneNbr: "03123456",
-      status: "Not Found",
-      lastUpdate: "120",
-    },
-  ];
+function CardPersonMissingList({ grid, data }) {
 
   if (data.length === 0) {
     return <div> Fix Empty List </div>;

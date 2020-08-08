@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import { Container, Row, Col, InputGroup, FormControl, Button, Tabs, Tab } from "react-bootstrap";
 import CardNGOList from "../../Components/Cards/CardNGO";
 import InformationMessage from "./Components/InformationMessage";
-import CardPersonMissingList from "../../Components/Cards/CardPersonMissing";
+import CardPersonMissing from "../../Components/Cards/CardPersonMissing";
 import CardAlertList from "../../Components/Cards/CardAlert";
 import CardWikiList from "../../Components/Cards/CardWiki";
+import { useFirestoreCollection } from "../../DB/useFirestore";
+
 
 function ReportMissing() {
+  const missingPeople = useFirestoreCollection("missing")
+
   return (
     <Container style={{padding: "0"}}>
       <InformationMessage />
@@ -28,8 +32,11 @@ function ReportMissing() {
             Add New
           </Button>
         </Col>
-
-        <CardPersonMissingList grid={true} />
+        { missingPeople.map(( data, { id } )=>{
+          return <Col key={`person-missing-${id}`} md={4}>
+            <CardPersonMissing  data={data} isGrid={true} />
+          </Col>
+        })}
       </Row>
     </Container>
   );
@@ -57,7 +64,8 @@ function TabNGO() {
   );
 }
 
-export default function HomaPage() {
+export default function HomePage() {
+
   const [key, setKey] = useState("home");
 
   return (
