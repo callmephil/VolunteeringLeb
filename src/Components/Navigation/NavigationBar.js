@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
+import { Navbar, Nav, Button } from "react-bootstrap";
 
 export default function NavigationBar() {
   return (
@@ -16,7 +16,7 @@ export default function NavigationBar() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link as={Link} to="/media">
+          {/* <Nav.Link as={Link} to="/media">
             MEDIA
           </Nav.Link>
           <NavDropdown title="HELP CENTER" id="collasible-nav-dropdown">
@@ -25,15 +25,12 @@ export default function NavigationBar() {
             <NavDropdown.Item href="financial">Financial support</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="humanitarian">Basic need request</NavDropdown.Item>
-          </NavDropdown>
-          <Nav.Link eventKey={2} href="/about">
-            ABOUT US
-          </Nav.Link>
+          </NavDropdown> */}
         </Nav>
         <Nav>
           <Button variant="outline-info">AR</Button>
-          <Nav.Link style={{ color: "white" }} eventKey={2} href="/support">
-            SUPPORT US!
+          <Nav.Link eventKey={2} href="/about">
+            ABOUT US
           </Nav.Link>
           <Nav.Link style={{ color: "white" }}  as={Link} to="/login">
             LOGIN

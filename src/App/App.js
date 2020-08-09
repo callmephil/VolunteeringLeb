@@ -2,17 +2,15 @@ import React from "react";
 
 import { Container } from "react-bootstrap";
 
-import "../Layout/card.css";
-import "../Layout/app.css";
-import "../Layout/tab.css";
+import "../Layout/layout.scss";
 
 import NavigationBar from "../Components/Navigation/NavigationBar";
 import HomePage from "../Pages/Home/HomePage";
 import NavigationFooter from "../Components/Navigation/NavigationFooter";
-import MediaPage from "../Pages/Media/MediaPage";
 import { Switch, Route } from "react-router-dom";
 import AboutPage from "../Pages/About/AboutPage";
 import UserPage from "../Pages/User/UserPage";
+import MediaPage from "../Pages/Media/MediaPage";
 
 /* 1. Small screen problem padding */
 

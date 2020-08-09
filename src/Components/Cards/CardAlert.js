@@ -6,9 +6,10 @@ function CardAlert({ data }) {
   return (
     <div style={{ paddingBottom: "10px" }}>
       <Card bg={type} text={"white"} className="mb-2 card-shadow">
-        <Card.Header>
-          <span className="fal fa-exclamation-triangle" style={{ marginRight: "10px" }}></span>
-          {header}
+        <Card.Header className="d-flex align-items-center">
+          <i className="fal fa-exclamation-triangle mr-2"></i>
+          <strong className="mr-auto">{header}</strong>
+          <small>just now</small>
         </Card.Header>
         <Card.Body>
           <Card.Title>{title}</Card.Title>
@@ -32,17 +33,17 @@ export default function CardAlertList() {
       title: "O+ Blood Needed",
       text: "Blood Needed at hotel-dieu hospital",
       button: {
-        text: "How-To",
+        text: "Contact",
         link: "/",
       },
     },
     {
-      type: "danger",
-      header: "Emergency",
-      title: "O+ Blood Needed",
-      text: "Blood Needed at hotel-dieu hospital",
+      type: "dark",
+      header: "Alert",
+      title: "Need Volunteer",
+      text: "NGO ... Looking for volunteer",
       button: {
-        text: "How-To",
+        text: "Contact",
         link: "/",
       },
     },
