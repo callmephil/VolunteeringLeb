@@ -1,64 +1,13 @@
 import React, { useState } from "react";
-import { Container, Row, Col, InputGroup, FormControl, Button, Tabs, Tab } from "react-bootstrap";
-import CardNGOList from "../../Components/Cards/CardNGO";
-import InformationMessage from "./Components/InformationMessage";
-import CardPersonMissingList from "../../Components/Cards/CardPersonMissing";
+import { Row, Col, Tabs, Tab } from "react-bootstrap";
 import CardAlertList from "../../Components/Cards/CardAlert";
-import CardWikiList from "../../Components/Cards/CardWiki";
-
-function ReportMissing() {
-  return (
-    <Container style={{ padding: "0" }}>
-      <InformationMessage />
-      <Row>
-        <Col sm={8} md={10}>
-          <InputGroup className="mb-3">
-            <FormControl
-              placeholder="Recipient's username"
-              aria-label="Recipient's username"
-              aria-describedby="basic-addon2"
-            />
-            <InputGroup.Append>
-              <Button variant="outline-secondary">Search</Button>
-            </InputGroup.Append>
-          </InputGroup>
-        </Col>
-        <Col sm={4} md={2} style={{ paddingLeft: "0" }}>
-          <Button style={{ width: "100%" }} variant="outline-secondary">
-            Add New
-          </Button>
-        </Col>
-
-        <CardPersonMissingList grid={true} />
-      </Row>
-    </Container>
-  );
-}
-
-function PrecautionCards() {
-  return (
-    <Container style={{ padding: "0" }}>
-      <InformationMessage />
-      <Row>
-        <CardWikiList grid={true} />
-      </Row>
-    </Container>
-  );
-}
-
-function TabNGO() {
-  return (
-    <Container style={{ padding: "0" }}>
-      <InformationMessage />
-      <Row>
-        <CardNGOList grid={true} />
-      </Row>
-    </Container>
-  );
-}
+import PrecautionsTab from "./Tabs/Precautions.tab";
+import ReportMissingTab from "./Tabs/ReportMissing.tab";
+import InstitutionsTab from "./Tabs/Institutions.tab";
+import FeedTab from "./Tabs/Feed.tab";
 
 export default function HomaPage() {
-  const [key, setKey] = useState("precautions");
+  const [key, setKey] = useState("feed");
 
   return (
     <Row>
@@ -68,14 +17,17 @@ export default function HomaPage() {
           id="controlled-tab-example"
           activeKey={key}
           onSelect={(k) => setKey(k)}>
+          <Tab eventKey="feed" title="Feed">
+            <FeedTab />
+          </Tab>
           <Tab eventKey="precautions" title="Precautions">
-            <PrecautionCards />
+            <PrecautionsTab />
           </Tab>
-          <Tab eventKey="report" title="Missing">
-            <ReportMissing />
+          <Tab eventKey="missing" title="Missing">
+            <ReportMissingTab />
           </Tab>
-          <Tab eventKey="ngo" title="NGO(s)">
-            <TabNGO />
+          <Tab eventKey="institutions" title="NGO(s)">
+            <InstitutionsTab />
           </Tab>
         </Tabs>
       </Col>

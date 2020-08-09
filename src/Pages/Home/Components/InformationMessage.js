@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { Alert, Button } from 'react-bootstrap';
 
 export default function InformationMessage() {
     const [show, setShow] = useState(true);
   
     return (
-      <>
+      <Fragment>
         <Alert show={show} variant="warning" className="card-shadow">
           <Alert.Heading>How's it going?!</Alert.Heading>
           <p>
@@ -21,6 +21,6 @@ export default function InformationMessage() {
         </Alert>
   
         {!show && <Button onClick={() => setShow(true)}>Show Alert</Button>}
-      </>
+      </Fragment>
     );
   }

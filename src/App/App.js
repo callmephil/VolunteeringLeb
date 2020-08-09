@@ -21,7 +21,7 @@ function App() {
       <Container fluid className="main-container">
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/media" component={MediaPage} />
+          {/* <Route exact path="/media" component={MediaPage} /> */}
           <Route exact path="/about" component={AboutPage} />
           <Route
             render={function () {
