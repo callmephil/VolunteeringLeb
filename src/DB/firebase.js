@@ -10,3 +10,8 @@ export const firestore = firebase.firestore();
 export const storage = firebase.storage();
 export const now = () => firebase.firestore.FieldValue.serverTimestamp()
 export const Timestamp = firebase.firestore.Timestamp
+const google = new firebase.auth.GoogleAuthProvider();
+
+export const signInWithGoogle = () => {
+  auth.signInWithPopup(google);
+};
