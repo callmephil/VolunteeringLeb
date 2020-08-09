@@ -2,9 +2,9 @@ import React from "react";
 import { Card, Row, Container, Button } from "react-bootstrap";
 import { formatDistanceToNow } from 'date-fns'
 
-export default function CardPersonMissing({ data, isGrid }) {
+export default function CardPersonMissing({ data, isLoading, isGrid }) {
 
-  const { fullName, img, description, location, phoneNbr, status, lastUpdate } = data;
+  const { fullName, photo, description, location, phoneNbr, status, lastUpdate } = data;
 
   const DisplayViewAllButton = () => {
     if (!isGrid) {
@@ -21,7 +21,7 @@ export default function CardPersonMissing({ data, isGrid }) {
   return (
     <div style={{ paddingBottom: "15px" }}>
       <Card className="card-shadow">
-        <Card.Img variant="top" src={img} width="330" height="330" />
+        <Card.Img variant="top" src={photo} width="330" height="330" />
         <Card.Header className=" text-align-center">MISSING: {fullName}</Card.Header>
         <Card.Body>
           <Card.Title></Card.Title>
@@ -47,7 +47,7 @@ export default function CardPersonMissing({ data, isGrid }) {
           </Container>
         </Card.Footer>
         <Card.Footer>
-          <small className="text-muted">Last updated {formatDistanceToNow(lastUpdate)} ago</small>
+          <small className="text-muted">{isLoading ? `...updating...` : `Last updated ${formatDistanceToNow(lastUpdate)} ago`}</small>
         </Card.Footer>
       </Card>
       <DisplayViewAllButton />
