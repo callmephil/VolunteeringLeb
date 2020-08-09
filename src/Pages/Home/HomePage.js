@@ -20,14 +20,14 @@ export default function HomaPage() {
           <Tab eventKey="feed" title="Feed">
             <FeedTab />
           </Tab>
-          <Tab eventKey="precautions" title="Precautions">
-            <PrecautionsTab />
-          </Tab>
           <Tab eventKey="missing" title="Missing">
             <ReportMissingTab />
           </Tab>
           <Tab eventKey="institutions" title="NGO(s)">
             <InstitutionsTab />
+          </Tab>
+          <Tab eventKey="precautions" title="Precautions">
+            <PrecautionsTab />
           </Tab>
         </Tabs>
       </Col>
