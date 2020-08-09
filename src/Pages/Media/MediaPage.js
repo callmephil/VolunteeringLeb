@@ -4,6 +4,8 @@ import CardPersonMissingList from "../../Components/Cards/CardPersonMissing";
 import FeedMedia from "../../Components/Feed/FeedMedia";
 import CardAlertList from "../../Components/Cards/CardAlert";
 
+import InstagramEmbed from "react-instagram-embed";
+
 export default function MediaPage() {
   const [key, setKey] = useState("home");
   return (
@@ -14,7 +16,7 @@ export default function MediaPage() {
 
       <Col md={7} style={{ padding: "0px 15px" }}>
         <Tabs
-          className="pb-2"
+          className="pb-2 tab-sm d-flex justify-content-md-start"
           id="controlled-tab-example"
           activeKey={key}
           onSelect={(k) => setKey(k)}>
@@ -23,7 +25,20 @@ export default function MediaPage() {
             <FeedMedia />
             <FeedMedia />
           </Tab>
-          <Tab eventKey="profile" title="Events"></Tab>
+          <Tab eventKey="profile" title="Events">
+            <InstagramEmbed
+              url="https://instagr.am/p/Zw9o4/"
+              maxWidth={320}
+              hideCaption={false}
+              containerTagName="div"
+              protocol=""
+              injectScript
+              onLoading={() => {}}
+              onSuccess={() => {}}
+              onAfterRender={() => {}}
+              onFailure={() => {}}
+            />
+          </Tab>
           <Tab eventKey="contact" title="Contact" disabled></Tab>
         </Tabs>
       </Col>

@@ -26,10 +26,13 @@ export default function NavigationBar() {
             <NavDropdown.Divider />
             <NavDropdown.Item href="humanitarian">Basic need request</NavDropdown.Item>
           </NavDropdown>
+          <Nav.Link eventKey={2} href="/about">
+            ABOUT US
+          </Nav.Link>
         </Nav>
         <Nav>
           <Button variant="outline-info">AR</Button>
-          <Nav.Link style={{ color: "white" }} eventKey={2} href="/helpus">
+          <Nav.Link style={{ color: "white" }} eventKey={2} href="/support">
             SUPPORT US!
           </Nav.Link>
           <Nav.Link style={{ color: "white" }}  as={Link} to="/login">
