@@ -64,7 +64,7 @@ export default function HomaPage() {
     <Row>
       <Col sm={9} className="no-padding">
         <Tabs
-          className="card-shadow"
+          className="card-shadow tab-sm d-flex justify-content-md-start"
           id="controlled-tab-example"
           activeKey={key}
           onSelect={(k) => setKey(k)}>
