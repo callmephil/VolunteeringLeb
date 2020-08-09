@@ -3,10 +3,14 @@ import { Col } from "react-bootstrap";
 
 const augmentChild = (child, isGrid) => cloneElement(child, { isGrid, ...child.props });
 
-const List = ({ grid, children, md=4 }) => {
+const EmptyList = () => <span>Empty List</span>
+
+const List = ({ grid, children, md=4, ifEmpty:Comp = EmptyList }) => {
+
   if(!Children.count(children)){
-   return <span>empty</span>
+   return <Comp/>
   }
+  
   const wrappedList = Children.map(children, child => {
     const augmentedChild = augmentChild(child, grid)
     if(grid){
