@@ -5,11 +5,13 @@ import InformationMessage from "./Components/InformationMessage";
 import CardPersonMissing from "../../Components/Cards/CardPersonMissing";
 import CardAlertList from "../../Components/Cards/CardAlert";
 import CardWikiList from "../../Components/Cards/CardWiki";
-import { useFirestoreCollection } from "../../DB/useFirestore";
+import { useMissingPeople } from "../../DB/missingPeople";
 import List from "../../Components/List";
+import MissingPersonForm from "../../Components/Forms/MissinPersonForm";
 
 function ReportMissing() {
-  const missingPeople = useFirestoreCollection("missing")
+  
+  const missingPeople = useMissingPeople()
 
   return (
     <Container style={{ padding: "0" }}>
@@ -33,9 +35,14 @@ function ReportMissing() {
           </Button>
         </Col>
         <List grid={true}>
-        { missingPeople.map(( data, { id } ) => <CardPersonMissing key={id} data={data} /> )
+        { missingPeople.map(( data, { id, dirty } ) => <CardPersonMissing key={id} isLoading={dirty} data={data} /> )
         }
         </List>
+      </Row>
+      <Row>
+        <Col>
+        <MissingPersonForm/>
+        </Col>
       </Row>
     </Container>
   );
