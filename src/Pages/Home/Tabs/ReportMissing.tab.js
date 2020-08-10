@@ -1,9 +1,15 @@
 import React, { Fragment } from "react";
 import { Row, Col, InputGroup, FormControl, Button } from "react-bootstrap";
-import CardPersonMissingList from "../../../Components/Cards/CardPersonMissing";
+import CardPersonMissing from "../../../Components/Cards/CardPersonMissing";
 import InformationMessage from "../Components/InformationMessage";
+import { useMissingPeople } from "../../../DB/missingPeople";
+import List from "../../../Components/List";
+import MissingPersonForm from "../../../Components/Forms/MissinPersonForm";
 
 export default function ReportMissingTab() {
+
+  const missingPeople = useMissingPeople()
+
   return (
     <Fragment>
       <InformationMessage />
@@ -25,8 +31,15 @@ export default function ReportMissingTab() {
             Add New
           </Button>
         </Col>
-
-        <CardPersonMissingList grid={true} />
+        <List grid={true}>
+        { missingPeople.map(( data, { id, dirty } ) => <CardPersonMissing key={id} isLoading={dirty} data={data} /> )
+        }
+        </List>
+      </Row>
+      <Row>
+        <Col>
+          <MissingPersonForm/>
+        </Col>
       </Row>
     </Fragment>
   );
