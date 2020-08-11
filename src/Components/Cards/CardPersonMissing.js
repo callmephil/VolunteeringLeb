@@ -22,7 +22,7 @@ export default function CardPersonMissing({ data, isLoading, isGrid }) {
     <div style={{ paddingBottom: "15px" }}>
       <Card className="card-shadow">
         <Card.Img variant="top" src={photo} width="330" height="330" />
-        <Card.Header className=" text-align-center">MISSING: {fullName}</Card.Header>
+        <Card.Header className=" text-align-center">{fullName}</Card.Header>
         <Card.Body>
           <Card.Title></Card.Title>
           <Card.Text>{description}</Card.Text>
