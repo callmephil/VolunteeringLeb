@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react'
 import InformationMessage from '../Components/InformationMessage';
+import CardWikiList from '../../Components/Cards/CardWiki';
 import { Row } from 'react-bootstrap';
-import CardNGOList from '../../../Components/Cards/CardNGO';
 
-export default function InstitutionsTab() {
+export default function PrecautionsPage() {
     return (
         <Fragment>
           <InformationMessage />
           <Row>
-            <CardNGOList grid={true} />
+            <CardWikiList grid={true} />
           </Row>
         </Fragment>
       );

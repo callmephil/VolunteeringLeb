@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Col, Card, Row } from "react-bootstrap";
-import InformationMessage from "../Components/InformationMessage";
 import InstagramEmbed from "react-instagram-embed";
 import { FacebookProvider, EmbeddedPost } from "react-facebook";
 import { Tweet } from "react-twitter-widgets";
@@ -62,7 +61,7 @@ const GetCardFromUrl = ({ url }) => {
   }
 };
 
-export default function FeedTab() {
+export default function SocialFeed() {
   // Todo save / load from database
   // Todo C.R.U.D form
   const list = [
@@ -76,10 +75,7 @@ export default function FeedTab() {
 
   return (
     <Fragment>
-      <InformationMessage />
-
-      {/* <Container> */}
-      <Row>
+      <Row className="mt-2">
         {list &&
           list.map((url, key) => (
             <Col key={`feed-${key}`}>
@@ -87,7 +83,6 @@ export default function FeedTab() {
             </Col>
           ))}
       </Row>
-      {/* </Container> */}
     </Fragment>
   );
 }

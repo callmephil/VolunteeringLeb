@@ -1,15 +1,20 @@
 import React from "react";
+import { Switch, Route } from "react-router-dom";
 
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 import "../Layout/layout.scss";
 
 import NavigationBar from "../Components/Navigation/NavigationBar";
-import HomePage from "../Pages/Home/HomePage";
 import NavigationFooter from "../Components/Navigation/NavigationFooter";
-import { Switch, Route } from "react-router-dom";
+// import HomePage from "../Pages/Home/HomePage";
 import AboutPage from "../Pages/About/AboutPage";
 import UserPage from "../Pages/User/UserPage";
+import MediaPage from "../Pages/Media/MediaPage";
+import CardAlertList from "../Components/Cards/CardAlert";
+import PrecautionsPage from "../Pages/Precautions/Precautions";
+import InstitutionsPage from "../Pages/Institutions/Institutions";
+import ReportMissingPage from "../Pages/Missing/ReportMissing";
 
 /* 1. Small screen problem padding */
 
@@ -19,16 +24,26 @@ function App() {
       <NavigationBar />
 
       <Container fluid className="main-container">
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/user" component={UserPage} />
-          <Route exact path="/about" component={AboutPage} />
-          <Route
-            render={function () {
-              return <p>Not found</p>;
-            }}
-          />
-        </Switch>
+        <Row>
+          <Col sm={9} className="no-padding">
+            <Switch>
+              <Route exact path="/" component={AboutPage} />
+              <Route exact path="/feed" component={MediaPage} />
+              <Route exact path="/missing" component={ReportMissingPage} />
+              <Route exact path="/ngo" component={InstitutionsPage} />
+              <Route exact path="/precautions" component={PrecautionsPage} />
+              <Route exact path="/user" component={UserPage} />
+              <Route
+                render={function () {
+                  return <p>Not found</p>;
+                }}
+              />
+            </Switch>
+          </Col>
+          <Col sm={3}>
+            <CardAlertList />
+          </Col>
+        </Row>
       </Container>
 
       <NavigationFooter />

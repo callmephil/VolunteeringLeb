@@ -6,7 +6,7 @@ export default function NavigationFooter() {
     // <div className="fixed-bottom">
       <Navbar sticky="bottom" expand="lg" bg="dark" variant="dark">
         <Container>
-          <NavbarBrand>Footer</NavbarBrand>
+          <NavbarBrand>04.08.2020</NavbarBrand>
         </Container>
       </Navbar>
     // </div>

@@ -22,9 +22,9 @@ export default function AboutPage() {
         onSelect={(k) => setKey(k)}>
         <Tab eventKey="about" title="About Helb">
           <About />
-        </Tab>
-        <Tab eventKey="faq" title="F.A.Q">
-          <FAQ />
+          <div className="mt-2"> 
+            <FAQ />
+          </div>
         </Tab>
         <Tab eventKey="contrib" title="Contributors">
           <Contributors />
