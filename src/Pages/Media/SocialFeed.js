@@ -32,7 +32,7 @@ const GetCardFromUrl = ({ url }) => {
   switch (type) {
     case "facebook":
       return (
-        <FacebookProvider appId={REACT_APP_FB_ID}>
+        <FacebookProvider appId={REACT_APP_FB_ID || "1234567"}>
           <EmbeddedPost href={url} width="500" />
         </FacebookProvider>
       );
