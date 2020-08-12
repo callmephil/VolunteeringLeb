@@ -17,11 +17,12 @@ Moderators have the standard account option.
 A Moderator will be able to verify the link and approve or deny it. *See form system
 Additionaly, a moderator can add new alert cards *See card/form system
 
-** moderator rank is attributed to a specific user (admin, worker at NGO, or "Helb" volunteer) **
+:warning: **moderator rank is attributed to a specific user (admin, worker at NGO, or "Helb" volunteer)
 
 # SPREADSHEET SYSTEM
-Spreadsheet should be parsed and transformed into table or cards (UX choice). 
-* Each spreadsheet has a different format so we need to provide a module containing a schema for that specific sheet.
+Spreadsheet should be parsed and transformed into table or cards (UX choice).
+
+:warning: Each spreadsheet has a different format so we need to provide a module containing a schema for that specific sheet.
 
 # CARDS SYSTEM
 
@@ -33,12 +34,14 @@ Support for the following platform:
 Each card is a link provided by a contributor.
 The link is then processed and return an embed card (Plugins/Dev API)
 cards will be displayed in the social feed under the feed page.
-** Special Case: Missing Person will be displayed in the Missing page (*See Missing page) ** 
+
+:warning: **Special Case: Missing Person will be displayed in the Missing page
 
 ## INSTITUIONS CARDS (NGO)
 This card is important, It display information for supporter to know which ngo are helping.
 it provide with informatives such as the name, a description and links:
 Current model: 
+```js
 {
   logo: 'string',
   backgroundColor: 'string',
@@ -49,12 +52,16 @@ Current model:
     text: 'string',
   ]
 }
-** It is unsure for now how institutions are submitted **
+```
+:warning: **It is unsure for now how institutions are submitted
 
 ## WIKI CARDS (Precautions)
-Wiki card are here to "teach" people how to react base in a situation/environment to limit risks
-ex: Covid-19 is still present and risk are higher than ever. Instruction are given such as how to wear a mask. additional instructions can be given. 
+Wiki card are here to "teach" people how to react base in a situation/environment to limit risks.
+> ex: Covid-19 is still present and risk are higher than ever. Instruction are given such as how to wear a mask. 
+**additional instructions can be given. 
+
 Current Model:
+```js
 { 
 imgSrc: 'string', 
 title: 'string', 
@@ -69,4 +76,5 @@ links: [
   reference: 'string', // name of the reference
 ]
 }
-** It is unsure for now how wikis are submitted **
+```
+:warning: **It is unsure for now how wikis are submitted**
