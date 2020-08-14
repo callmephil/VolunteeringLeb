@@ -30,12 +30,12 @@ export default function ReportMissingPage() {
             Add New
           </Button>
         </Col>
-        <List grid={true}>
-          {missingPeople.map((data, { id, dirty }) => (
-            <CardPersonMissing key={id} isLoading={dirty} data={data} />
-          ))}
-        </List>
       </Row>
+      <List grid={true}>
+        {missingPeople.map((data, { id, dirty }) => (
+          <CardPersonMissing key={id} isLoading={dirty} data={data} />
+        ))}
+      </List>
       <Row>
         <Col>
           <MissingPersonForm />

@@ -25,7 +25,7 @@ function App() {
 
       <Container fluid className="main-container">
         <Row>
-          <Col sm={9} className="no-padding">
+          <Col md={8} lg={9} xl={10} >
             <Switch>
               <Route exact path="/" component={AboutPage} />
               <Route exact path="/feed" component={MediaPage} />
@@ -40,7 +40,7 @@ function App() {
               />
             </Switch>
           </Col>
-          <Col sm={3}>
+          <Col md={4} lg={3} xl={2}>
             <CardAlertList />
           </Col>
         </Row>

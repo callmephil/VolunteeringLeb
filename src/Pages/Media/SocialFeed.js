@@ -1,8 +1,10 @@
 import React, { Fragment } from "react";
-import { Col, Card, Row } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import InstagramEmbed from "react-instagram-embed";
 import { FacebookProvider, EmbeddedPost } from "react-facebook";
 import { Tweet } from "react-twitter-widgets";
+import List from "../../Components/List";
+import InformationMessage from "../Components/InformationMessage";
 
 const { REACT_APP_FB_ID } = process.env;
 
@@ -64,7 +66,7 @@ const GetCardFromUrl = ({ url }) => {
 export default function SocialFeed() {
   // Todo save / load from database
   // Todo C.R.U.D form
-  const list = [
+  const data = [
     "https://www.instagram.com/p/CDq5WKLn1E8/",
     "https://twitter.com/AnisTabet23/status/1292343373353885698",
     "https://www.instagram.com/p/CDq23qEHJw3/",
@@ -75,14 +77,10 @@ export default function SocialFeed() {
 
   return (
     <Fragment>
-      <Row className="mt-2">
-        {list &&
-          list.map((url, key) => (
-            <Col key={`feed-${key}`}>
-              <GetCardFromUrl url={url} />
-            </Col>
-          ))}
-      </Row>
+      <InformationMessage />
+      <List grid>
+        {data && data.map((url, key) => <GetCardFromUrl key={key} url={url} />)}
+      </List>
     </Fragment>
   );
 }

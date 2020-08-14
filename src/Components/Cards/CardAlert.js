@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Card, Button } from "react-bootstrap";
 
 function CardAlert({ data }) {
   const { type, header, title, text, button } = data;
   return (
-    <div style={{ paddingBottom: "10px" }}>
+    <div className="mb-2 mt-2" style={{ minWidth: "220px", maxWidth: "296px" }}>
       <Card bg={type} text={"white"} className="mb-2 card-shadow">
         <Card.Header className="d-flex align-items-center">
           <i className="fal fa-exclamation-triangle mr-2"></i>
@@ -54,10 +54,10 @@ export default function CardAlertList() {
   }
 
   return (
-    <React.Fragment>
+    <Fragment>
       {data.map((cardInfo, key) => (
         <CardAlert key={`alert-${key}`} data={cardInfo} />
       ))}
-    </React.Fragment>
+    </Fragment>
   );
 }
